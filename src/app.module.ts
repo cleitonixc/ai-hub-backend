@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DealerService } from './dealer/dealer.service';
 import { DealerController } from './dealer/dealer.controller';
+import { DealerEntity } from './dealer/dealer.entity';
 
 @Module({
   imports: [
@@ -21,8 +22,10 @@ import { DealerController } from './dealer/dealer.controller';
       synchronize: true,
     }),
     UserModule,
+    TypeOrmModule.forFeature([DealerEntity]),
   ],
   controllers: [DealerController],
   providers: [DealerService],
 })
 export class AppModule {}
+

@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { DealerEntity } from './dealer.entity';
 import { DealerService } from './dealer.service';
+import { CreateDealerDto } from './dtos/createDealer.dto';
 
 @Controller('dealer')
 export class DealerController {
@@ -25,16 +26,8 @@ export class DealerController {
   }
 
   @Post()
-  async createDealer(@Body() dealer: DealerEntity): Promise<DealerEntity> {
-    return this.dealerService.createDealer(dealer);
-  }
-
-  @Put(':id')
-  async updateDealer(
-    @Param('id') id: string,
-    @Body() dealer: DealerEntity,
-  ): Promise<DealerEntity> {
-    return this.dealerService.updateDealer(id, dealer);
+  async createDealer(@Body() createDealerDto: CreateDealerDto): Promise<DealerEntity> {
+    return this.dealerService.createDealer(createDealerDto);
   }
 
   @Delete(':id')

@@ -1,7 +1,7 @@
 import { UserEntity } from 'src/user/user.entity';
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
-@Entity()
+@Entity({ name: 'dealers' })
 export class DealerEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -12,6 +12,9 @@ export class DealerEntity {
   // enterprise document
   @Column({ name: 'enterprise_document', nullable: false, length: 14 })
   enterpriseDocument: string;
+
+  @Column({ name: 'email', nullable: true, length: 100 })
+  email: string;
 
   @Column({ name: 'phone', nullable: true, length: 11 })
   phone: string;

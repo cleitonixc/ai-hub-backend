@@ -1,7 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { v4 as uuidv4 } from 'uuid';
 import { DealerEntity } from './dealer.entity';
+import { CreateDealerDto } from './dtos/createDealer.dto';
 
 @Injectable()
 export class DealerService {
@@ -18,8 +20,14 @@ export class DealerService {
     return this.dealerRepository.findOne({ where: { id } });
   }
 
-  async createDealer(dealer: DealerEntity): Promise<DealerEntity> {
-    return this.dealerRepository.save(dealer);
+  async createDealer(createDealerDto: CreateDealerDto): Promise<DealerEntity> {
+    return await this.dealerRepository.save({
+      ...createDealerDto,
+      id: uuidv4(),
+      isActive: true,
+      isDeleted: false,
+      isBlocked: false,
+    });
   }
 
   async updateDealer(id: string, dealer: DealerEntity): Promise<DealerEntity> {
