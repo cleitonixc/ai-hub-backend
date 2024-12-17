@@ -6,6 +6,14 @@
 # Environment variables
 .env*
 
+# ESLint
+.eslintrc
+
+# Git
+.gitignore
+
+.prettierrc
+
 # Logs
 logs
 *.log
