@@ -1,14 +1,18 @@
-export interface CreateUserDto {
+import { IsEmail, IsNotEmpty, IsString, IsBoolean, IsNumber, IsEnum } from 'class-validator';
+import { UserType } from '../user.entity';
+
+export class CreateUserDto {
+  @IsString()
+  @IsNotEmpty()
   name: string;
+
+  @IsEmail()
+  @IsNotEmpty()
   email: string;
-  phone: string;
-  personDocument: string;
+
+  @IsString()
   password: string;
-  isAdmin: boolean;
-  isSuperAdmin: boolean;
-  isActive: boolean;
-  isDeleted: boolean;
-  isBlocked: boolean;
-  lastAccess: Date;
-  dealerId: number;
+
+  @IsEnum(UserType)
+  type: UserType;
 }

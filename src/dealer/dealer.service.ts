@@ -17,7 +17,17 @@ export class DealerService {
   }
 
   async getDealerById(id: string): Promise<DealerEntity> {
-    return this.dealerRepository.findOne({ where: { id } });
+    return this.dealerRepository.findOne({ 
+      where: { 
+        id 
+      },
+      relations: {
+        address: {
+          city: true,
+          state: true
+        }
+      }
+    });
   }
 
   async createDealer(createDealerDto: CreateDealerDto): Promise<DealerEntity> {

@@ -1,5 +1,5 @@
-import { UserEntity } from 'src/user/user.entity';
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { AddressEntity } from '../address/address.entity';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 
 @Entity({ name: 'dealers' })
 export class DealerEntity {
@@ -19,20 +19,9 @@ export class DealerEntity {
   @Column({ name: 'phone', nullable: true, length: 11 })
   phone: string;
 
-  @Column({ name: 'address', nullable: true, length: 255 })
-  address: string;
-
-  @Column({ name: 'city', nullable: true, length: 100 })
-  city: string;
-
-  @Column({ name: 'state', nullable: true, length: 2 })
-  state: string;
-
-  @Column({ name: 'zip_code', nullable: true, length: 8 })
-  zipCode: string;
-
-  @Column({ name: 'country', nullable: true, length: 100 })
-  country: string;
+  @ManyToOne(() => AddressEntity, (address) => address.id)
+  @JoinColumn({ name: 'address_id', referencedColumnName: 'id' })
+  address: AddressEntity;
 
   @Column({ name: 'is_active', nullable: false, default: true })
   isActive: boolean;
@@ -49,6 +38,4 @@ export class DealerEntity {
   @Column({ name: 'deleted_at', nullable: true })
   deletedAt: Date;
 
-  @OneToMany(() => UserEntity, (user) => user.dealerId)
-  users: UserEntity[];
 }
