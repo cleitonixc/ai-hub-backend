@@ -1,5 +1,5 @@
 import { Base64Converter } from "./base-64-converter";
-import { LoginPayloadDto } from "../auth/dtos/loginPayload.dto";
+import { LoginPayloadDto } from "src/app/auth/dtos/loginPayload.dto";
 
 export const AuthorizationToPayload = {
   toPayload: (authorization: string): LoginPayloadDto | undefined => {
